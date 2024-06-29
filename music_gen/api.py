@@ -18,8 +18,8 @@ def gen_api(desc: str, output_file_name: str) -> None:
     None: This function does not return any value. It writes the generated audio to a file.
 
     Example:
-    >>> gen_api("A calm and soothing piano melody.", "output_audio")
-    This will create a file named 'output_audio.wav' containing the generated audio.
+    >>> gen_api("A Russian ballet with synths.", "music")
+    This will create a file named 'music.wav' containing the generated audio.
     """
 
     # Load the pre-trained processor and model from the 'facebook/musicgen-small' model
