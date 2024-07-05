@@ -1,6 +1,9 @@
+import os
 import scipy
 from pydub import AudioSegment
 from transformers import AutoProcessor, MusicgenForConditionalGeneration
+
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 def gen_api(desc: str, output_file_name: str, audio_length: int) -> None:
     """
