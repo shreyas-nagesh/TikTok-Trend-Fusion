@@ -3,7 +3,7 @@ import scipy
 import numpy as np
 from transformers import AutoProcessor, MusicgenForConditionalGeneration
 
-# Disable parallelism for tokenizers to avoid potential issues
+# Disable parallelism for tokenizers to avoid potential deadlocks
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 
@@ -29,7 +29,7 @@ def gen_api(desc: str, output_file_name: str, audio_length: int) -> None:
 
     # Load the pre-trained processor and model
     processor = AutoProcessor.from_pretrained("facebook/musicgen-small")
-    model = MusicgenForConditionalGeneration.from_pretrained("facebook/musicgen-small")
+    model = MusicgenForConditionalGeneration.from_pretrained("facebook/musicgen-small", attn_implementation="eager")
 
     # Process the input description text
     inputs = processor(
