@@ -1,62 +1,52 @@
 import os
 import scipy
-from pydub import AudioSegment
+import numpy as np
 from transformers import AutoProcessor, MusicgenForConditionalGeneration
 
+# Disable parallelism for tokenizers to avoid potential issues
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
+
 
 def gen_api(desc: str, output_file_name: str, audio_length: int) -> None:
     """
     Generate audio from a textual description and save it as a .wav file.
 
-    This function uses a pre-trained model from the 'facebook/musicgen-small' to generate
-    audio data based on the provided textual description. The generated audio is then
-    saved to a specified output file in .wav format.
+    This function uses a pre-trained model to generate audio data based on the provided
+    textual description and saves it to a specified .wav file.
 
     Parameters:
-    desc (str): A string containing the description based on which the audio will be generated.
-    output_file_name (str): The name of the output file (without extension) where the generated audio will be saved.
-    audio_length (int): The length of the audio generated. Integer value given multiplied by 5 seconds will be the length of the audio.
+    desc (str): Description based on which the audio will be generated.
+    output_file_name (str): Name of the output file (without extension) where the generated audio will be saved.
+    audio_length (int): Length of the audio in multiples of 5 seconds.
 
     Returns:
-    None: This function does not return any value. It writes the generated audio to a file.
+    None
 
     Example:
     >>> gen_api("A Russian ballet with synths.", "music", 2)
     This will create a file named 'music.wav' containing the generated audio of length 10 seconds.
     """
 
-    # Load the pre-trained processor and model from the 'facebook/musicgen-small' model
+    # Load the pre-trained processor and model
     processor = AutoProcessor.from_pretrained("facebook/musicgen-small")
     model = MusicgenForConditionalGeneration.from_pretrained("facebook/musicgen-small")
 
-    # Process the input description text to get the input tensors for the model
+    # Process the input description text
     inputs = processor(
         text=[desc],  # Input text description
-        padding=True,  # Apply padding to the input text
-        return_tensors="pt",  # Return the input as PyTorch tensors
+        padding=True,  # Apply padding
+        return_tensors="pt",  # Return as PyTorch tensors
     )
 
-    # Generate audio values using the model with the processed inputs
+    # Generate audio values using the model
     audio_values = model.generate(**inputs, max_new_tokens=256)
 
     # Get the sampling rate from the model's configuration
     sampling_rate = model.config.audio_encoder.sampling_rate
 
-    # Write the generated audio values to a .wav file
-    scipy.io.wavfile.write(
-        output_file_name + ".wav", rate=sampling_rate, data=audio_values[0, 0].numpy()
-    )
+    # Extend the generated audio to match the specified length
+    audio = audio_values[0, 0].numpy()
+    audio = np.tile(audio, audio_length)
 
-    # Load the generated audio file
-    audio = AudioSegment.from_file(output_file_name + ".wav")
-
-    # Initialize the lengthened audio with the original audio
-    lengthened_audio = audio
-
-    # Loop through and concatenate the audio to make it the desired length
-    for _ in range(audio_length - 1):
-        lengthened_audio += audio
-
-    # Export the lengthened audio to the same file
-    lengthened_audio.export(output_file_name + ".wav", format="wav")
+    # Write the generated audio to a .wav file
+    scipy.io.wavfile.write(output_file_name + ".wav", rate=sampling_rate, data=audio)
