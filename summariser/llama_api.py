@@ -7,9 +7,11 @@ def llama_api(desc: str) -> str:
     api_request_idea = {
     "model": "llama3-8b",
     "messages": [
-        {"role": "system", "content": "You are a tiktok trend generator which can summarise ideas and come up with something new and generate a concise concept."},
+        {"role": "system", "content": "You are a tiktok trend idea generator which can come up with a new trend idea. Give 1 example video idea. Your response should be a concise description of the idea."},
         {"role": "user", "content": desc},
-    ]
+    ],
+    "max_tokens": 250,
+    "stream": False
     }
 
     api_request_song = {
