@@ -1,5 +1,5 @@
 import os
-import scipy
+import scipy.io.wavfile
 import numpy as np
 from transformers import AutoProcessor, MusicgenForConditionalGeneration
 
@@ -7,7 +7,7 @@ from transformers import AutoProcessor, MusicgenForConditionalGeneration
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 
-def gen_api(desc: str, output_file_name: str, audio_length: int) -> None:
+def gen_api(desc: str, output_file_name: str, audio_length: int) -> str:
     """
     Generate audio from a textual description and save it as a .wav file.
 
@@ -20,7 +20,7 @@ def gen_api(desc: str, output_file_name: str, audio_length: int) -> None:
     audio_length (int): Length of the audio in multiples of 5 seconds.
 
     Returns:
-    None
+    str: URL of the output file.
 
     Example:
     >>> gen_api("A Russian ballet with synths.", "music", 2)
@@ -29,7 +29,8 @@ def gen_api(desc: str, output_file_name: str, audio_length: int) -> None:
 
     # Load the pre-trained processor and model
     processor = AutoProcessor.from_pretrained("facebook/musicgen-small")
-    model = MusicgenForConditionalGeneration.from_pretrained("facebook/musicgen-small", attn_implementation="eager")
+    model = MusicgenForConditionalGeneration.from_pretrained(
+        "facebook/musicgen-small", attn_implementation="eager")
 
     # Process the input description text
     inputs = processor(
@@ -48,5 +49,14 @@ def gen_api(desc: str, output_file_name: str, audio_length: int) -> None:
     audio = audio_values[0, 0].numpy()
     audio = np.tile(audio, audio_length)
 
+    # Ensure the output path is in the static directory
+    static_dir = os.path.join('static', 'audio')
+    if not os.path.exists(static_dir):
+        os.makedirs(static_dir)
+    output_file_path = os.path.join(static_dir, output_file_name + ".wav")
+
     # Write the generated audio to a .wav file
-    scipy.io.wavfile.write(output_file_name + ".wav", rate=sampling_rate, data=audio)
+    scipy.io.wavfile.write(output_file_path, rate=sampling_rate, data=audio)
+
+    # Return the file URL
+    return os.path.join('static', 'audio', output_file_name + ".wav")
