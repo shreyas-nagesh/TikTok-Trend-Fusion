@@ -3,9 +3,6 @@ import scipy.io.wavfile
 import numpy as np
 from transformers import AutoProcessor, MusicgenForConditionalGeneration
 
-# Disable parallelism for tokenizers to avoid potential deadlocks
-os.environ["TOKENIZERS_PARALLELISM"] = "false"
-
 
 def gen_api(desc: str, output_file_name: str, audio_length: int) -> str:
     """
