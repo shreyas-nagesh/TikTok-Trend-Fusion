@@ -1,3 +1,9 @@
 venv
 *.wav
 __pycache__
+env/
+tiktok_videos/client_secret.json
+tiktok_videos/techjam.json
+.DS_Store
+.gitignore
+.git

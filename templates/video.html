@@ -1,0 +1,40 @@
+<div class="container d-flex">
+    <div class="content-part" id="left-content">
+        <div class="loader" id="video-loader">
+            <img class="loader-img" src="{{ url_for('static', filename='img/loader-unscreen.gif') }}" alt="Loading..." style="height:170px">
+        </div>
+        <div class="video-container">
+            {% if video_urls %}
+                {% for video_url in video_urls %}
+                    <video width="320" height="240" controls>
+                        <source src="{{ video_url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div class="content-part" id="right-content">
+        <div class="loader" id="audio-loader">
+            <img class="loader-img" src="{{ url_for('static', filename='img/loader-unscreen.gif') }}" alt="Loading...">
+        </div>
+        <div id="audio-content">
+            <div id="info-text" class="text-box" style="display: none;">
+                <h2>Generated Music</h2>
+                <p id="prompt-text"></p>
+            </div>
+            <div id="audio-player" style="display: none;">
+                <audio controls id="audio-element">
+                    <source id="audio-source" type="audio/wav">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const generateAudioUrl = "{{ url_for('generate_audio') }}";
+</script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>

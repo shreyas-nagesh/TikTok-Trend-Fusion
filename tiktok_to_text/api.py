@@ -54,13 +54,14 @@ def text_cleaning(input_text: str):
 
     # Extract the summary text
     summary_text = input_text[
-        input_text.find(summary_start) + len(summary_start) : input_text.find(
+        input_text.find(summary_start) + len(summary_start): input_text.find(
             summary_end
         )
     ].strip()
 
     # Extract the tags text
-    tags_text = input_text[input_text.find(tags_start) + len(tags_start) :].strip()
+    tags_text = input_text[input_text.find(
+        tags_start) + len(tags_start):].strip()
     tags_text = tags_text.replace("* ", "").replace("\n*", "\n").strip()
 
     return summary_text, tags_text
