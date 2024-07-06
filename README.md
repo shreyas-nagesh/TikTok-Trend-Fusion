@@ -1,1 +1,3 @@
-# Name-To-Be-Decided
+# TikTok Trend Fusion
+
+AI-Driven Music Synthesis and Trend Generator
