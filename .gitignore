@@ -1,5 +1,6 @@
 venv
 *.wav
+*.png
 __pycache__
 env/
 tiktok_videos/client_secret.json
