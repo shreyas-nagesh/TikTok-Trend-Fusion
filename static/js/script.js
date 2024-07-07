@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var input = document.querySelector('#search');
+    var input = document.querySelector('#main-search');
     var availableTags = JSON.parse(document.getElementById('trending-tags').textContent);
 
-    $("#search").autocomplete({
+    $("#main-search").autocomplete({
         source: availableTags,
         minLength: 0, // Ensures the autocomplete shows all options on focus
         create: function () {
             $(this).data('ui-autocomplete')._renderItem = function (ul, item) {
                 return $('<li>')
-                    .append('<div><i class="fas fa-search autocomplete-icon"></i>' + item.label + '</div>')
+                    .append('<div><i class="fas fa-search"></i>' + item.label + '</div>')
                     .appendTo(ul);
             };
         }
@@ -32,9 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();
             var loader = document.getElementById('video-loader');
             var audioLoader = document.getElementById('audio-loader');
-            if (loader && audioLoader) {
+            if (loader) {
+                document.getElementById("trend-message").style.display = 'none';
                 loader.style.display = 'block';
-                audioLoader.style.display = 'block';
+                audioLoader.style.display = 'none';
             }
             const formData = new FormData(this);
             fetch(this.action, {
@@ -44,7 +45,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(html => {
                     console.log("Response received for video generation");
                     loader.style.display = 'none';
-                    document.getElementById('left-content').innerHTML = html;
+                    audioLoader.style.display = 'block';
+                    document.getElementById('left-content').style.display = 'block';
+                    document.getElementById('right-content').style.display = 'block';
+                    document.getElementById('body-content').innerHTML = html;
                     // Trigger audio generation
                     fetch(generateAudioUrl, {
                             method: 'POST',
@@ -53,17 +57,22 @@ document.addEventListener('DOMContentLoaded', function () {
                         .then(data => {
                             console.log("Response received for audio generation");
                             audioLoader.style.display = 'none';
+                            document.getElementById('audio-loader').style.display = 'none';
                             var audioContent = document.getElementById('audio-content');
+                            audioContent.style.display = 'block';
                             var infoText = document.getElementById('info-text');
-                            var promptText = document.getElementById('prompt-text');
+                            var ideaText = document.getElementById('idea-text');
+                            var conceptText = document.getElementById('concept-text');
                             var audioPlayer = document.getElementById('audio-player');
                             var audioSource = document.getElementById('audio-source');
                             if (data.audio_url) {
-                                console.log("Audio URL: " + data.audio_url);
-                                promptText.textContent = data.idea_description;
+                                audioContent.style.display = 'block';
+                                ideaText.textContent = data.idea;
+                                conceptText.textContent = data.concept;
                                 infoText.style.display = 'block';
                                 audioSource.src = data.audio_url;
                                 audioPlayer.style.display = 'block';
+
                             } else {
                                 audioContent.innerHTML = '<p>No audio generated.</p>';
                             }

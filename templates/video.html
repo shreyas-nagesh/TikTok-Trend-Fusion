@@ -1,30 +1,52 @@
-<div class="container d-flex">
-    <div class="content-part" id="left-content">
-        <div class="loader" id="video-loader">
-            <img class="loader-img" src="{{ url_for('static', filename='img/loader-unscreen.gif') }}" alt="Loading..." style="height:170px">
-        </div>
+<div class="loader" id="video-loader">
+    <img class="loader-img" src="{{ url_for('static', filename='img/loader-unscreen.gif') }}" alt="Loading..." style="height:170px">
+    <h4 class="loader-text">Fetching your trends...</h4>
+</div>
+    <div class="content-part left-content" id="left-content">
         <div class="video-container">
             {% if video_urls %}
+                <h2> Featured Videos </h2>
                 {% for video_url in video_urls %}
-                    <video width="320" height="240" controls>
-                        <source src="{{ video_url }}" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    <div class="video-wrapper">
+                        <video width="320" height="240" controls>
+                            <source src="{{ video_url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-actions">
+                            <button class="action-btn like-btn"><i class="fas fa-heart"></i> Like</button>
+                            <button class="action-btn comment-btn"><i class="fas fa-comment"></i> Comment</button>
+                            <button class="action-btn share-btn"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </div>
                 {% endfor %}
             {% endif %}
         </div>
     </div>
-    <div class="divider"></div>
-    <div class="content-part" id="right-content">
+    <div class="content-part right-content" id="right-content">
         <div class="loader" id="audio-loader">
-            <img class="loader-img" src="{{ url_for('static', filename='img/loader-unscreen.gif') }}" alt="Loading...">
+            <img class="loader-img" src="{{ url_for('static', filename='img/loader.gif') }}" alt="Loading..." style="height:170px">
+            <h4 class="loader-text">
+                Just a few more seconds, 
+                <br> 
+                fetching your trend ideas and music! 
+            </h4>
         </div>
-        <div id="audio-content">
-            <div id="info-text" class="text-box" style="display: none;">
-                <h2>Generated Music</h2>
-                <p id="prompt-text"></p>
+        <div id="audio-content" style="display:none;">
+            <div id="info-text">
+                <p class="idea-title">TikTok trend idea for you!</p>
+                <div class="text-box">
+                    <p id="idea-text" class="idea-text"></p>
+                    <p id="concept-text" class="concept-text"></p>
+                </div>
             </div>
-            <div id="audio-player" style="display: none;">
+            <div class="generated-image-container">
+                <h2>Sample Generated Image</h2>
+                <div class="image-box">
+                    <img src="{{ url_for('root_static', filename='gen_img.png') }}" alt="Generated Image" class="rounded-image" height="200px">
+                </div>
+            </div>
+            <div id="audio-player">
+                <h2>Generated Music</h2>
                 <audio controls id="audio-element">
                     <source id="audio-source" type="audio/wav">
                     Your browser does not support the audio element.
@@ -32,9 +54,12 @@
             </div>
         </div>
     </div>
-</div>
+
+
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 <script>
     const generateAudioUrl = "{{ url_for('generate_audio') }}";
 </script>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>

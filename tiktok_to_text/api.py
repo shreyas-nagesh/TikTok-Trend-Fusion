@@ -17,7 +17,7 @@ def llama_api_summary_tag(desc: str) -> str:
     str: The summarized text along with tags/keywords.
     """
     llama = LlamaAPI(
-        "LL-hnLAldQnBSQkOtMJcXBNfIRagQyCCKyMFDwL96NhNdNdhj0UIP1DdF8v3AGpRuxK"
+        "LL-vc1xoxRAiBZbaAVEhMGkYyHc1PEn0uw8elJirZRKZwcqosPJj38B8idwX0aT0Dvi"
     )
 
     # API Request JSON structure

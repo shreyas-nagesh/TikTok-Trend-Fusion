@@ -20,13 +20,20 @@ def fetch_video_ids_from_folder(folder_id):
 
 
 def download_videos(tag, output_dir):
-    folder_ids = {
-        "Love": "1JYv-bd4bWg2LucmnS0631wqJCABAwA0g",
-        "Drama": "1JYv-bd4bWg2LucmnS0631wqJCABAwA0g",
-        "Comedy": "1JYv-bd4bWg2LucmnS0631wqJCABAwA0g"
+    folders = {
+        "#AI - #MachineLearning - #TechInnovation": "1JYv-bd4bWg2LucmnS0631wqJCABAwA0g",
+        "#Foodie - #RecipeOfTheDay - #CookingHacks": "1oGdZ8xWMq3bH74MhFL8PmDKOv5IK2p0I",
+        "#MakeupTutorial - #BeautyHacks - #SkincareRoutine": "1bn2d-6tjDi9cb03uRwFG019B4CKjnyT7",
+        "#OOTD - #FashionInspo - #StyleTips": "1axVn0xBJ41grkByuCdEOGNFJ-YjVIJST",
+        "#TravelVlog - #HiddenGems - #TravelTips": "1Y1zbBzSWB_sbQp7P7Y4yAnX3UzWQtLfl"
     }
 
-    folder_id = folder_ids.get(tag)
+    folder_id = None
+    for folder_name, fid in folders.items():
+        if f"#{tag}" in folder_name.split(" - "):
+            folder_id = fid
+            break
+
     if not folder_id:
         return []
 

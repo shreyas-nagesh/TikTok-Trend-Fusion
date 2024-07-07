@@ -3,7 +3,7 @@ from llamaapi import LlamaAPI
 
 def llama_api(desc: str) -> str:
     llama = LlamaAPI(
-        'LL-hnLAldQnBSQkOtMJcXBNfIRagQyCCKyMFDwL96NhNdNdhj0UIP1DdF8v3AGpRuxK')
+        'LL-vc1xoxRAiBZbaAVEhMGkYyHc1PEn0uw8elJirZRKZwcqosPJj38B8idwX0aT0Dvi')
 
     # API Request JSON Cell
     api_request_idea = {

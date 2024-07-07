@@ -9,74 +9,97 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify@4.9.6/dist/tagify.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch&family=El+Messiri:wght@400..700&family=Margarine&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar-container">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <a class="navbar-brand" href="#">
-                <img src="{{ url_for('static', filename='img/image.png') }}" alt="Logo 1" height="50">
-            </a>
-            <div class="d-flex flex-grow-1 justify-content-center">
-                <form id="searchForm" class="d-flex search-bar" action="{{ url_for('search') }}" method="POST">
-                    <input id="search" name="search_tags" class="form-control" type="text" placeholder="Search" aria-label="Search">
-                    <button type="submit" class="search-icon btn btn-link"><i class="fas fa-search"></i></button>
-                </form>
-            </div>
-            <button class="btn upload-btn"><i class="fas fa-plus"></i> Upload</button>
-            <img src="{{ url_for('static', filename='img/menu.png') }}" alt="Logo 1" height="50">
-        </div>
-    </div>
-    <hr>
+    <header class="header-banner">
+        <img src="{{ url_for('static', filename='img/brand.png') }}" alt="TikTok Banner">
+    </header>
     <div class="body-container">
         <div class="sidebar">
             <a href="#" class="menu-item">
-                <img src="{{ url_for('static', filename='img/home.png') }}" alt="Logo 1" height="30">
+                <img src="{{ url_for('static', filename='img/home.png') }}" alt="Home" height="30">
                 <span>For You</span>
             </a>
             <a href="#" class="menu-item active">
-                <img src="{{ url_for('static', filename='img/compass.png') }}" alt="Logo 1" height="30">
+                <img src="{{ url_for('static', filename='img/compass.png') }}" alt="Explore" height="30">
                 <span>Explore</span>
             </a>
             <a href="#" class="menu-item">
-                <img src="{{ url_for('static', filename='img/following.png') }}" alt="Logo 1" height="30">
+                <img src="{{ url_for('static', filename='img/following.png') }}" alt="Following" height="30">
                 <span>Following</span>
             </a>
             <a href="#" class="menu-item">
-                <img src="{{ url_for('static', filename='img/friends.png') }}" alt="Logo 1" height="30">
+                <img src="{{ url_for('static', filename='img/friends.png') }}" alt="Friends" height="30">
                 <span>Friends</span>
             </a>
             <a href="#" class="menu-item">
-                <img src="{{ url_for('static', filename='img/live.png') }}" alt="Logo 1" height="30">
+                <img src="{{ url_for('static', filename='img/live.png') }}" alt="LIVE" height="30">
                 <span>LIVE</span>
             </a>
             <hr>
-            <div class="section">
-                <h3 style="color:#c1c1c1">Following accounts</h3>
-                <p>Accounts you follow will appear here</p>
+            <div class="section ai-trends">
+                <h3 class="trends-text">Check out the new AI-generated trends</h3>
+                <i class="fas fa-arrow-right"></i>
             </div>
             <hr>
-            <div class="section">
-                <h3>Company</h3>
-                <a href="#">About</a>
-                <a href="#">Newsroom</a>
-                <a href="#">Contact</a>
-                <a href="#">Careers</a>
+            <div class="section menu">
+                <img src="{{ url_for('static', filename='img/menu.png') }}" alt="Logo 1" height="77">
             </div>
-            
-            <div class="section">
-                <a href="#" style="text-decoration:none">© 2024 TikTok</a>
-            </div>
+            <hr>
         </div>
-        <div class="container d-flex">
-            <div class="content-part" id="left-content">
-                <div class="loader" id="video-loader">
-                    <img class="loader-img" src="{{ url_for('static', filename='img/loader-unscreen.gif') }}" alt="Loading..." style="height:170px">
-                </div>
+        <div class="main-container">
+            <div class="container justify-content-center align-items-center search-container">
+                <form id="searchForm" class="d-flex search-box" action="{{ url_for('search') }}" method="POST">
+                    <input type="text" name="search_tags" id="main-search" class="form-control" placeholder="Search for trends ...">
+                    <button id="search-btn" class="btn btn-link"><i class="fas fa-search"></i></button>
+                </form>
             </div>
-            <div class="divider"></div>
-            <div class="content-part" id="right-content">
-                <div class="loader" id="audio-loader">
-                    <img class="loader-img" src="{{ url_for('static', filename='img/loader-unscreen.gif') }}" alt="Loading...">
+            <div class="container content-container">
+                <div id="trend-message" class="trend-message">
+                    <div class="small-text">
+                        Stuck in a trend rut? Ready for something new?
+                        <br>
+                        Break free with innovative AI-generated trends!
+                    </div>
+                    <br>
+                    <div class="big-text">Now Introducing Our New AI-Powered Tool!</div>
+                    <div class="image-container">
+                        <img src="{{ url_for('static', filename='img/image.png') }}" alt="TikTok trend text" class="image">
+                        <div class="text-overlay big-text">TrendTok</div>
+                    </div>
+                    <div class="small-text"> 
+                        Not only can it generate trendsetting ideas,
+                        <br>
+                        but it also provides fresh, exciting music for your background. 
+                        <br>
+                        Elevate your content and stand out with the latest AI innovations!
+                    </div>
+                </div>
+                <div id="body-content" class="view-container">
+                    <div class="loader" id="video-loader">
+                        <img class="loader-img" src="{{ url_for('static', filename='img/loader-unscreen.gif') }}" alt="Loading..." style="height:170px">
+                        <h4 class="loader-text">Fetching your trends...</h4>
+                    </div>
+                    <div class="content-part left-content" id="left-content" style="display:none;">
+                        {% block left %}{% endblock %}
+                    </div>
+                    <div class="content-part right-content" id="right-content" style="display:none;">
+                        <div class="loader" id="audio-loader" style="display:none;">
+                            <img id="audio-loader-img"  class="loader-img" src="{{ url_for('static', filename='img/loader.gif') }}" alt="Loading..." style="height:170px">
+                            <h4 id="audio-loader-text" class="loader-text">
+                                Just a few more seconds, 
+                                <br> 
+                                fetching your trend ideas and music! 
+                            </h4>
+                        </div>
+                        {% block right %}{% endblock %}
+                    </div>
                 </div>
             </div>
         </div>
