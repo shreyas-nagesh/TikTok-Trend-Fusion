@@ -25,4 +25,4 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker buildx build --push --tag ghcr.io/${{ github.repository }}/trendtok:latest .
+          docker buildx build --push --tag ghcr.io/trendtok:latest .
