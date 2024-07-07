@@ -1,0 +1,35 @@
+# Add files in .gitignore
+venv
+__pycache__
+env/
+tiktok_videos/client_secret.json
+.DS_Store
+.gitignore
+.git
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+ENV/
+.venv/
+
+# Ignore log files and databases
+*.log
+*.sqlite3
+
+# Ignore environment variables file
+.env
+
+# Ignore Dockerfile and docker-compose files
+Dockerfile
+docker-compose.yml
+
+# Ignore any other files or directories that should not be included in the Docker image
+.git/
+.gitignore
+README.md
