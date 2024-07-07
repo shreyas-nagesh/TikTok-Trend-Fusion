@@ -32,7 +32,7 @@ COPY . .
 RUN python init.py
 
 # Expose the port the app runs on
-EXPOSE 5000
+EXPOSE 8888
 
 # Command to run the application
 CMD ["python", "app.py"]
