@@ -105,7 +105,6 @@ def generate_media():
 
     # Generate the audio using the song description
     output_file_path = gen_api(song_description, 'new_audio', 6)
-    output_file_path = "static/audio/new_audio.wav"
     print("Output File Path:", output_file_path)
 
     audio_url = url_for(
