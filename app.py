@@ -51,13 +51,11 @@ def search():
 
     video_urls = [url_for('static', filename=os.path.join(
         'video', search_tags, os.path.basename(video))) for video in video_files]
-    print(video_urls)
 
     # Convert video URLs to absolute paths
     base_dir = os.path.abspath(os.path.dirname(__file__))
     absolute_video_paths = [os.path.join(
         base_dir, url.lstrip('/')) for url in video_files]
-    print(absolute_video_paths)
 
     session['video_urls'] = absolute_video_paths
     return render_template('video.html', video_urls=video_urls)
@@ -66,6 +64,7 @@ def search():
 @ app.route('/generate_audio', methods=['POST'])
 def generate_audio():
     video_urls = session.get('video_urls', [])
+    print("Video URLs:", video_urls)
 
     text_summary = t4_api(video_urls)
 
@@ -86,10 +85,11 @@ def generate_audio():
 
     # Generate the audio using the song description
     # generate_image(concept)
-    print("Image Generated")
+
     # output_file_path = gen_api(song_description, 'new_audio', 2)
     output_file_path = "static/audio/new_audio.wav"
     print("Output File Path:", output_file_path)
+
     audio_url = url_for(
         'static', filename=f'audio/{os.path.basename(output_file_path)}')
     return jsonify(audio_url=audio_url, idea=idea, concept=concept)

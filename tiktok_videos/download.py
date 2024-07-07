@@ -42,14 +42,17 @@ def download_videos(tag, output_dir):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    video_files = []
-    for i, video_id in enumerate(video_ids):
-        if i <= 2:
-            video_url = f"https://drive.google.com/uc?id={video_id}"
-            output_path = os.path.join(output_dir, f'video_{i + 1}.mp4')
-            gdown.download(video_url, output_path, quiet=False)
-            video_files.append(output_path)
-        else:
-            break
+        video_files = []
+        for i, video_id in enumerate(video_ids):
+            if i <= 2:
+                video_url = f"https://drive.google.com/uc?id={video_id}"
+                output_path = os.path.join(output_dir, f'video_{i + 1}.mp4')
+                gdown.download(video_url, output_path, quiet=False)
+                video_files.append(output_path)
+            else:
+                break
+    else:
+        video_files = [os.path.join(output_dir, f) for f in os.listdir(
+            output_dir) if f.endswith('.mp4')]
 
     return video_files

@@ -91,7 +91,8 @@ def transcribe_audio_from_video(video_file):
     audio_file = sr.AudioFile("temp_audio.wav")
     with audio_file as source:
         audio_data = recognizer.record(source)
-        text = recognizer.recognize_google(audio_data)
+        text = recognizer.recognize_google(
+            audio_data, language='en', show_all=True)
 
     return text
 
