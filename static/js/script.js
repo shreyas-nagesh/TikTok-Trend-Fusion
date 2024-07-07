@@ -72,6 +72,9 @@ document.addEventListener('DOMContentLoaded', function () {
                                 infoText.style.display = 'block';
                                 audioSource.src = data.audio_url;
                                 audioPlayer.style.display = 'block';
+                                var audioElement = document.getElementById('audio-element');
+                                audioElement.load();
+                                audioElement.play();
 
                             } else {
                                 audioContent.innerHTML = '<p>No audio generated.</p>';
