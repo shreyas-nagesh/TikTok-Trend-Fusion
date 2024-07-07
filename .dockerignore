@@ -6,6 +6,7 @@ tiktok_videos/client_secret.json
 .DS_Store
 .gitignore
 .git
+static/video/*
 
 # Ignore Python cache files
 __pycache__/
