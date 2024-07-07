@@ -100,13 +100,13 @@ def generate_media():
         return jsonify(error="Missing data for generating media"), 400
 
     # Generate the image using the tags
-    output_img_path = os.path.join('static', 'gen_img', f"{tags}.png")
+    output_img_path = os.path.join('static', 'gen_img', f"{tags[0]}.png")
     generate_image(tags, output_img_path)
-    img_url = url_for('static', filename=f'gen_img/{tags}.png')
+    img_url = url_for('static', filename=f'gen_img/{tags[0]}.png')
 
     # Generate the audio using the song description
-    # output_file_path = gen_api(song_description, 'new_audio', 6)
-    output_file_path = "static/audio/new_audio.wav"
+    output_file_path = gen_api(song_description, 'new_audio', 6)
+    # output_file_path = "static/audio/new_audio.wav"
 
     audio_url = url_for(
         'static', filename=f'audio/{os.path.basename(output_file_path)}')
