@@ -16,11 +16,6 @@ app.secret_key = secret_key
 Bootstrap(app)
 
 
-@app.route('/root/<path:filename>')
-def root_static(filename):
-    return send_from_directory(os.path.abspath(os.getcwd()), filename)
-
-
 @app.route('/')
 def home():
     trending_tags = ["AI", "MachineLearning", "TechInnovation", "Foodie", "RecipeOfTheDay", "CookingHacks",
@@ -100,9 +95,9 @@ def generate_media():
         return jsonify(error="Missing data for generating media"), 400
 
     # Generate the image using the tags
-    output_img_path = os.path.join('static', 'gen_img', f"{tags}.png")
+    output_img_path = os.path.join('static', 'gen_img', "new_img.png")
     generate_image(tags, output_img_path)
-    img_url = url_for('static', filename=f'gen_img/{tags}.png')
+    img_url = url_for('static', filename='gen_img/new_img.png')
 
     # Generate the audio using the song description
     # output_file_path = gen_api(song_description, 'new_audio', 6)
