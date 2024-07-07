@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "techjam-428602",
+  "private_key_id": "7e0638dd8fea40128707c901fb24c8f9874735f6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC+G7oYjkQTwVEV\nhs5ZpvgXSmT8Sh24PpFTa6oqIIhXU8lf+u2nlGtDKwgEQGNTyFZPMvLnFqPNneXz\nYOI5JJAtb527q9xdr7c6/oTZ69s2kRCJP6Ez26zq+nXRWD1oUosXwvzbkMuX79bQ\nOEQwp5StkDkTAxDqnV7orrpOV4SE/hiuENmNq/PLw+Hr8IOZG4HCFtnL7IIGebKo\n/BPArH63/8snSMq/1VAfN0QodEgaSA5sxSC35HHLz1TjIWHnOKZRAGHwfdJb5zen\n/VBKFGT5rtdIJvp22VjaRMKUZV9u3RCw4rx0kSg8fFK+bz30O7doUgSIVVrH5Wpv\nvPig3drJAgMBAAECggEABdSvthnuScUpDEC5+q3LGAXIB/qVo5rHAM4W0PDLVb2u\nub2mb+MhZhTqC51WSTx7XzWoFcE6mBoix9PzJFRe2Ac/c9aJ2AAayIRZb/NSt39R\nXfBLF14tFSObnPvjSEbt2Aulj0Nx5yYBSpogh0srMtFEsDSsyRFiFuoTB0eaZizK\nWRkzEE4txguRzuuWO1YQKZzkbrhwTQ+ca13+6ueMNIltnu5CY2Zicy7tLz8Aw3dd\nMXeJg/9RmrHW1Jj+bWL8drj4n3rh8Z8bmveHMA0zIuRJglrk0cIxbU2xlmNP+TND\n0qYGbI5eYYUngExiLzc7bW9Jf5yABEL+mPeuhghJAQKBgQD2Eib6YYmDTjScZqw0\nBjsE8l2G6UizQm//kYUGtxYfCHlFzU1m6dTDO6d3836x9H3U7P3IkoBHX3h5dTmP\ndS9Wx5YZUx4VcH+cwC10ruC+CgApASWB2gDmPODi3jPpFJn3sFo9FH8hhf72A2sT\nmc3mUrfOwHE4enGKv5+LX6C9gQKBgQDFx37pte0WbjY2x7qrrz167oQti2Jf9C4F\nMqVBldWHgY2yUPG5JTyxaSeX4hw/v/N333rjrECm2aQLH04/GNKTkoeQVYWt2Szi\nrDvhTlWZ0/W85RG6wXWVb+BLkszrmDO0pPtzNn5EaSLyLjHASz3WbvLOfvJ0wTLE\n9U8brRJRSQKBgDEakjiouh4/vvPu8TI4hBKKoutHJkDPYzYmvdsHMhzjPgAV5fpB\nczm6b8LaDlBIr8uLt2ENCxgzDwF9yQy9n8K7dVJ8aaZxmqWXG/sK4sJJkJqeJfPx\novhO8bmUCdvbRpZM1NUXf/8alDRXnkh9Cr+JhjB16qIQnRPJBXd0j8kBAoGBAJgg\n7WQDhcxdFeJpGxL4BkhKsuz9a7v27HcfD7I0+Dv00PM6A9Sv6dFk2wme6K+4jCPG\niJYbZtdwTRgpClzKUR8l9JR21A53IGlypdSWFo3uVfToFg0axcEeft5imrEVL6Bh\nzvA+GD2yySiTk70fov8P9EAVsZVRDiYlsqXNKGvRAoGAQ9NdiGTgSiZWJBeg3iqp\nAy/FrI7SL+CjYAspSR2RsYVxMPj+aThmpQzhkqczDM/jH8msqX7/kE0Xcv4Ml9ww\nI3bWieUw4g5MBhhK6Mtw09DJcaPnoH2Sm3TLp2YDVKDUT37SUp3yi6Ndn7blFqDg\nqj+6tPYQoupaTMxmf9J10xo=\n-----END PRIVATE KEY-----\n",
+  "client_email": "tiktok@techjam-428602.iam.gserviceaccount.com",
+  "client_id": "111220559719175446819",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tiktok%40techjam-428602.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
