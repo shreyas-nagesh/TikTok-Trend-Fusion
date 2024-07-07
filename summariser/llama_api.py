@@ -10,7 +10,7 @@ def llama_api(desc: str) -> str:
         "model": "llama3-8b",
         "messages": [
             {"role": "system", "content": "You are a tiktok trend idea generator which can come up with a new trend idea. Give 1 example video idea. Your response should be a concise description of the idea."},
-            {"role": "user", "content": desc},
+            {"role": "user", "content": desc["tags"]},
         ],
         "max_tokens": 250,
         "stream": False
@@ -20,7 +20,7 @@ def llama_api(desc: str) -> str:
         "model": "llama3-8b",
         "messages": [
             {"role": "system", "content": "You are a tiktok trend generator which can take tags and generate audio cues to be given to a Music generator model. Your response includes only the audio description for a 5 second clip. It is very concise."},
-            {"role": "user", "content": desc},
+            {"role": "user", "content": desc["tags"]},
         ]
     }
 
