@@ -1,5 +1,6 @@
 import os
 from typing import Dict, List
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import moviepy.editor as mp
 import speech_recognition as sr
@@ -17,7 +18,7 @@ def llama_api_summary_tag(desc: str) -> str:
     str: The summarized text along with tags/keywords.
     """
     llama = LlamaAPI(
-        "LL-vc1xoxRAiBZbaAVEhMGkYyHc1PEn0uw8elJirZRKZwcqosPJj38B8idwX0aT0Dvi"
+        "LL-5jGRFRsV3TctJy0qMVwno5LKiAoWEHreyTZVCbNrUJVaUp3AcAB3HqiRH1dCpzSi"
     )
 
     # API Request JSON structure
@@ -82,13 +83,14 @@ def transcribe_audio_from_video(video_file):
 
     # Extract audio from the video
     audio = video.audio
-    audio.write_audiofile("temp_audio.wav")
+    name = video_file.split('.')[0].split('/')[-1]
+    audio.write_audiofile(f"temp_audio{name}.wav")
 
     # Initialize the recognizer
     recognizer = sr.Recognizer()
 
     # Load and transcribe the audio file
-    audio_file = sr.AudioFile("temp_audio.wav")
+    audio_file = sr.AudioFile(f"temp_audio{name}.wav")
     with audio_file as source:
         audio_data = recognizer.record(source)
         text = recognizer.recognize_google(
@@ -108,17 +110,25 @@ def t4_api(video_files: List[str]) -> Dict:
     Returns:
     Dict: A dictionary containing the summarized text and tags.
     """
-    all_transcriptions = []
-
-    # Process each video file
-    for video_file in video_files:
+    def process_video(video_file):
         # Transcribe audio from the video
         transcription = transcribe_audio_from_video(video_file)
-        all_transcriptions.append(transcription)
         print(f"Transcription for {video_file}:\n{transcription}\n")
 
-        # Clean up temporary audio file
-        os.remove("temp_audio.wav")
+        return transcription
+
+    all_transcriptions = []
+
+    # Use ThreadPoolExecutor to parallelize the processing of video files
+    with ThreadPoolExecutor() as executor:
+        future_to_video = {executor.submit(process_video, video_file): video_file for video_file in video_files}
+        for future in as_completed(future_to_video):
+            video_file = future_to_video[future]
+            try:
+                transcription = future.result()
+                all_transcriptions.append(transcription)
+            except Exception as e:
+                print(f"Exception occurred while processing {video_file}: {e}")
 
     # Combine all transcriptions into one text
     all_transcriptions_text = "\n\n".join(all_transcriptions)
@@ -126,6 +136,11 @@ def t4_api(video_files: List[str]) -> Dict:
     # Summarize the combined transcriptions and extract tags
     summary_tag = llama_api_summary_tag(all_transcriptions_text)
     summary_text, tags_text = text_cleaning(summary_tag)
+
+    # Clean up temporary audio file
+    name = [video_file.split('.')[0].split('/')[-1] for video_file in video_files]
+    for i in name:
+        os.remove(f"temp_audio{i}.wav")
 
     return {
         "summary": summary_text,
