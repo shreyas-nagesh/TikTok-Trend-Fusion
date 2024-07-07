@@ -92,7 +92,7 @@ def transcribe_audio_from_video(video_file):
     with audio_file as source:
         audio_data = recognizer.record(source)
         text = recognizer.recognize_google(
-            audio_data, language='en', show_all=True)
+            audio_data, language='en')
 
     return text
 

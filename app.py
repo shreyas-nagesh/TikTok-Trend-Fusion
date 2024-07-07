@@ -86,7 +86,7 @@ def generate_audio():
     # Generate the audio using the song description
     # generate_image(concept)
 
-    # output_file_path = gen_api(song_description, 'new_audio', 2)
+    output_file_path = gen_api(song_description, 'new_audio', 6)
     output_file_path = "static/audio/new_audio.wav"
     print("Output File Path:", output_file_path)
 
