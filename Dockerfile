@@ -1,5 +1,5 @@
 # Choose base arm64 image
-FROM --platform=linux/arm64 debian:12
+FROM debian:12
 
 # Update the base image
 RUN apt-get update && apt-get upgrade -y
@@ -32,7 +32,7 @@ COPY . .
 RUN python init.py
 
 # Expose the port the app runs on
-EXPOSE 5000
+EXPOSE 8888
 
 # Command to run the application
 CMD ["python", "app.py"]
