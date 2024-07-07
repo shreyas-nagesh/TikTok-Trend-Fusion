@@ -17,7 +17,7 @@ def llama_api_summary_tag(desc: str) -> str:
     str: The summarized text along with tags/keywords.
     """
     llama = LlamaAPI(
-        "LL-hnLAldQnBSQkOtMJcXBNfIRagQyCCKyMFDwL96NhNdNdhj0UIP1DdF8v3AGpRuxK"
+        "LL-vc1xoxRAiBZbaAVEhMGkYyHc1PEn0uw8elJirZRKZwcqosPJj38B8idwX0aT0Dvi"
     )
 
     # API Request JSON structure
@@ -54,13 +54,14 @@ def text_cleaning(input_text: str):
 
     # Extract the summary text
     summary_text = input_text[
-        input_text.find(summary_start) + len(summary_start) : input_text.find(
+        input_text.find(summary_start) + len(summary_start): input_text.find(
             summary_end
         )
     ].strip()
 
     # Extract the tags text
-    tags_text = input_text[input_text.find(tags_start) + len(tags_start) :].strip()
+    tags_text = input_text[input_text.find(
+        tags_start) + len(tags_start):].strip()
     tags_text = tags_text.replace("* ", "").replace("\n*", "\n").strip()
 
     return summary_text, tags_text
