@@ -69,7 +69,7 @@ def generate_idea():
     text_summary = t4_api(video_urls)
 
     # Get the idea and song descriptions from the Llama API
-    idea_description, song_description = llama_api(text_summary["summary"])
+    idea_description, song_description = llama_api(text_summary)
 
     idea_start = idea_description.find(
         "**Video Idea:**") + len("**Video Idea:**")
@@ -100,12 +100,13 @@ def generate_media():
         return jsonify(error="Missing data for generating media"), 400
 
     # Generate the image using the tags
-    generate_image(tags)
-    img_url = url_for('root_static', filename='gen_img.png')
+    output_img_path = os.path.join('static', 'gen_img', f"{tags}.png")
+    generate_image(tags, output_img_path)
+    img_url = url_for('static', filename=f'gen_img/{tags}.png')
 
     # Generate the audio using the song description
-    output_file_path = gen_api(song_description, 'new_audio', 6)
-    print("Output File Path:", output_file_path)
+    # output_file_path = gen_api(song_description, 'new_audio', 6)
+    output_file_path = "static/audio/new_audio.wav"
 
     audio_url = url_for(
         'static', filename=f'audio/{os.path.basename(output_file_path)}')

@@ -7,20 +7,15 @@ body {
     width: 100%;
     height: 200px;
     overflow: hidden;
-    /* Ensures that the image does not overflow the header */
     display: flex;
     justify-content: center;
-    /* Centers the image horizontally */
     align-items: center;
-    /* Centers the image vertically */
 }
 
 .header-banner img {
     width: 100%;
     height: auto;
-    /* Maintain aspect ratio */
     object-fit: cover;
-    /* Ensures the image covers the entire header */
     display: block;
 }
 
