@@ -44,9 +44,12 @@ def download_videos(tag, output_dir):
 
     video_files = []
     for i, video_id in enumerate(video_ids):
-        video_url = f"https://drive.google.com/uc?id={video_id}"
-        output_path = os.path.join(output_dir, f'video_{i + 1}.mp4')
-        gdown.download(video_url, output_path, quiet=False)
-        video_files.append(output_path)
+        if i <= 2:
+            video_url = f"https://drive.google.com/uc?id={video_id}"
+            output_path = os.path.join(output_dir, f'video_{i + 1}.mp4')
+            gdown.download(video_url, output_path, quiet=False)
+            video_files.append(output_path)
+        else:
+            break
 
     return video_files

@@ -1,6 +1,5 @@
 venv
 *.wav
-*.png
 __pycache__
 env/
 .DS_Store

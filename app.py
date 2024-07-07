@@ -81,8 +81,8 @@ def generate_audio():
     concept_start = idea_end + len("Concept:")
     concept = idea_description[concept_start:].strip()
 
-    # print("Idea Description:", idea_description)
-    # print("Song Description:", song_description)
+    print("Idea Description:", idea_description)
+    print("Song Description:", song_description)
 
     # Generate the audio using the song description
     # generate_image(concept)
