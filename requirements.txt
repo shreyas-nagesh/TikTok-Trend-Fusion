@@ -45,3 +45,4 @@ flask-bootstrap==3.3.7.1
 gdown==5.2.0
 google-auth==2.31.0
 google-api-python-client==2.136.0
+accelerate==0.32.1
