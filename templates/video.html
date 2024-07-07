@@ -31,7 +31,7 @@
                 fetching your trend ideas and music! 
             </h4>
         </div>
-        <div id="audio-content" style="display:none;">
+        <div id="idea-content" style="display:none;">
             <div id="info-text">
                 <p class="idea-title">TikTok trend idea for you!</p>
                 <div class="text-box">
@@ -39,10 +39,20 @@
                     <p id="concept-text" class="concept-text"></p>
                 </div>
             </div>
+        </div>
+        <div class="loader" id="audio-loader-2" style="display:none;">
+            <img class="loader-img" src="{{ url_for('static', filename='img/loader.gif') }}" alt="Loading..." style="height:170px">
+            <h4 class="loader-text">
+                Just a few more seconds, 
+                <br> 
+                fetching your music! 
+            </h4>
+        </div>
+        <div id="audio-content" style="display:none;">
             <div class="generated-image-container">
                 <h2>Sample Generated Image</h2>
                 <div class="image-box">
-                    <img src="{{ url_for('root_static', filename='gen_img.png') }}" alt="Generated Image" class="rounded-image" height="200px">
+                    <img id="generated-image" src="{{ url_for('root_static', filename='gen_img.png') }}" alt="Generated Image" class="rounded-image" height="200px">
                 </div>
             </div>
             <div id="audio-player">
@@ -55,11 +65,8 @@
         </div>
     </div>
 
-
-
-
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 <script>
-    const generateAudioUrl = "{{ url_for('generate_audio') }}";
+    const generateAudioUrl = "{{ url_for('generate_media') }}";
 </script>

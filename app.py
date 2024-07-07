@@ -61,8 +61,8 @@ def search():
     return render_template('video.html', video_urls=video_urls)
 
 
-@ app.route('/generate_audio', methods=['POST'])
-def generate_audio():
+@ app.route('/generate_idea', methods=['POST'])
+def generate_idea():
     video_urls = session.get('video_urls', [])
     print("Video URLs:", video_urls)
 
@@ -70,7 +70,6 @@ def generate_audio():
 
     # Get the idea and song descriptions from the Llama API
     idea_description, song_description = llama_api(text_summary["summary"])
-    # idea_description, song_description = llama_api(text_summary["tags"])
 
     idea_start = idea_description.find(
         "**Video Idea:**") + len("**Video Idea:**")
@@ -83,16 +82,36 @@ def generate_audio():
     print("Idea Description:", idea_description)
     print("Song Description:", song_description)
 
-    # Generate the audio using the song description
-    # generate_image(concept)
+    # Store song description in session for later use
+    session['idea'] = idea
+    session['tags'] = text_summary["tags"]
+    session['song_description'] = song_description
+    session['concept'] = concept
 
+    return jsonify(idea=idea, concept=concept)
+
+
+@ app.route('/generate_media', methods=['POST'])
+def generate_media():
+    song_description = session.get('song_description', '')
+    tags = session.get('tags', '')
+
+    if not song_description or not tags:
+        return jsonify(error="Missing data for generating media"), 400
+
+    # Generate the image using the tags
+    # generate_image(tags)
+    img_url = url_for('root_static', filename='gen_img.png')
+
+    # Generate the audio using the song description
     output_file_path = gen_api(song_description, 'new_audio', 6)
     output_file_path = "static/audio/new_audio.wav"
     print("Output File Path:", output_file_path)
 
     audio_url = url_for(
         'static', filename=f'audio/{os.path.basename(output_file_path)}')
-    return jsonify(audio_url=audio_url, idea=idea, concept=concept)
+
+    return jsonify(audio_url=audio_url, img_url=img_url)
 
 
 if __name__ == '__main__':

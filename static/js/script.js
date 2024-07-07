@@ -49,36 +49,51 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('left-content').style.display = 'block';
                     document.getElementById('right-content').style.display = 'block';
                     document.getElementById('body-content').innerHTML = html;
-                    // Trigger audio generation
-                    fetch(generateAudioUrl, {
+                    fetch('/generate_idea', {
                             method: 'POST',
                             body: formData
                         }).then(response => response.json())
                         .then(data => {
-                            console.log("Response received for audio generation");
-                            audioLoader.style.display = 'none';
+                            console.log("Response received for idea and concept");
+                            var ideaContent = document.getElementById('idea-content');
+                            ideaContent.style.display = 'block';
                             document.getElementById('audio-loader').style.display = 'none';
-                            var audioContent = document.getElementById('audio-content');
-                            audioContent.style.display = 'block';
-                            var infoText = document.getElementById('info-text');
+                            document.getElementById('audio-loader-2').style.display = 'block';
                             var ideaText = document.getElementById('idea-text');
                             var conceptText = document.getElementById('concept-text');
-                            var audioPlayer = document.getElementById('audio-player');
+                            var infoText = document.getElementById('info-text');
+
+                            ideaText.textContent = data.idea;
+                            conceptText.textContent = data.concept;
+                            infoText.style.display = 'block';
+                            console.log("Idea generated: " + data.idea);
+                            return fetch('/generate_media', {
+                                method: 'POST',
+                                body: formData
+                            });
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log("Response received for audio generation");
+                            document.getElementById('audio-loader-2').style.display = 'none';
+                            var audioContent = document.getElementById('audio-content');
+                            audioContent.style.display = 'block';
                             var audioSource = document.getElementById('audio-source');
+                            var audioPlayer = document.getElementById('audio-player');
+
                             if (data.audio_url) {
-                                audioContent.style.display = 'block';
-                                ideaText.textContent = data.idea;
-                                conceptText.textContent = data.concept;
-                                infoText.style.display = 'block';
                                 audioSource.src = data.audio_url;
                                 audioPlayer.style.display = 'block';
                                 var audioElement = document.getElementById('audio-element');
                                 audioElement.load();
                                 audioElement.play();
-
                             } else {
                                 audioContent.innerHTML = '<p>No audio generated.</p>';
                             }
+                            var imageElement = document.getElementById('generated-image');
+                            imageElement.src = data.img_url;
+                            imageElement.style.display = 'block';
+
                             console.log("All done!");
                         });
                 });
