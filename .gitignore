@@ -6,3 +6,4 @@ env/
 .gitignore
 .git
 static/video/*
+tiktok_videos/techjam.json
