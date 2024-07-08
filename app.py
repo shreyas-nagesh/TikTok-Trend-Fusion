@@ -18,9 +18,9 @@ Bootstrap(app)
 
 @app.route('/')
 def home():
-    trending_tags = ["AI", "MachineLearning", "TechInnovation", "Foodie", "RecipeOfTheDay", "CookingHacks",
-                     "MakeupTutorial", "BeautyHacks", "SkincareRoutine", "OOTD", "FashionInspo",
-                     "StyleTips", "TravelVlog", "HiddenGems", "TravelTips"]
+    trending_tags = ["MakeupTutorial", "BeautyHacks", "SkincareRoutine",  "TravelVlog", "HiddenGems",
+                     "TravelTips", "Foodie", "RecipeOfTheDay", "CookingHacks", "OOTD", "FashionInspo",
+                     "StyleTips", "AI", "MachineLearning", "TechInnovation"]
 
     return render_template('index.html', trending_tags=trending_tags)
 
@@ -70,8 +70,8 @@ def generate_idea():
 
     # Extract the "Trend Name"
     trend_name_start = idea_description.find(
-        "**Trend Name:**") + len("**Trend Name:**")
-    trend_name_end = idea_description.find("**Video Idea:**")
+        "Trend Idea:") + len("Trend Idea:")
+    trend_name_end = idea_description.find("Trend Concept:")
     trend_name = idea_description[trend_name_start:trend_name_end].strip().strip(
         '"')
 
@@ -79,12 +79,12 @@ def generate_idea():
 
     # Extract the "Video Idea"
     video_idea_start = idea_description.find(
-        "**Video Idea:**") + len("**Video Idea:**")
+        "Trend Concept:") + len("Trend Concept:")
     video_idea = idea_description[video_idea_start:].strip()
     video_idea_lines = video_idea.split('\n')
     formatted_video_idea = '\n'.join(line.strip() for line in video_idea_lines)
 
-    print("Video Idea:", formatted_video_idea)
+    print("Trend Idea:", formatted_video_idea)
 
     # Store song description in session for later use
     session['idea'] = trend_name
@@ -106,7 +106,7 @@ def generate_media():
     # Generate the image using the tags
     output_img_path = os.path.join('static', 'gen_img', f"{tags[0]}.png")
     generate_image(tags, output_img_path)
-    # img_url = url_for('static', filename=f'gen_img/{tags[0]}.png')
+    img_url = url_for('static', filename=f'gen_img/{tags[0]}.png')
 
     # Generate the audio using the song description
     output_file_path = gen_api(song_description, 'new_audio', 6)
