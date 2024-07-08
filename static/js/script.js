@@ -66,7 +66,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             ideaText.textContent = data.idea;
                             conceptText.textContent = data.concept;
                             infoText.style.display = 'block';
-                            console.log("Idea generated: " + data.idea);
                             return fetch('/generate_media', {
                                 method: 'POST',
                                 body: formData

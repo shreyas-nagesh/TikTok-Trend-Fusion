@@ -59,31 +59,40 @@ def search():
 @ app.route('/generate_idea', methods=['POST'])
 def generate_idea():
     video_urls = session.get('video_urls', [])
-    print("Video URLs:", video_urls)
 
     text_summary = t4_api(video_urls)
 
     # Get the idea and song descriptions from the Llama API
     idea_description, song_description = llama_api(text_summary)
 
-    idea_start = idea_description.find(
-        "**Video Idea:**") + len("**Video Idea:**")
-    idea_end = idea_description.find("Concept:")
-    idea = idea_description[idea_start:idea_end].strip()
-
-    concept_start = idea_end + len("Concept:")
-    concept = idea_description[concept_start:].strip()
-
     print("Idea Description:", idea_description)
     print("Song Description:", song_description)
 
+    # Extract the "Trend Name"
+    trend_name_start = idea_description.find(
+        "**Trend Name:**") + len("**Trend Name:**")
+    trend_name_end = idea_description.find("**Video Idea:**")
+    trend_name = idea_description[trend_name_start:trend_name_end].strip().strip(
+        '"')
+
+    print("Trend Name:", trend_name)
+
+    # Extract the "Video Idea"
+    video_idea_start = idea_description.find(
+        "**Video Idea:**") + len("**Video Idea:**")
+    video_idea = idea_description[video_idea_start:].strip()
+    video_idea_lines = video_idea.split('\n')
+    formatted_video_idea = '\n'.join(line.strip() for line in video_idea_lines)
+
+    print("Video Idea:", formatted_video_idea)
+
     # Store song description in session for later use
-    session['idea'] = idea
+    session['idea'] = trend_name
     session['tags'] = text_summary["tags"]
     session['song_description'] = song_description
-    session['concept'] = concept
+    session['concept'] = formatted_video_idea
 
-    return jsonify(idea=idea, concept=concept)
+    return jsonify(idea=trend_name, concept=formatted_video_idea)
 
 
 @ app.route('/generate_media', methods=['POST'])
@@ -97,11 +106,10 @@ def generate_media():
     # Generate the image using the tags
     output_img_path = os.path.join('static', 'gen_img', f"{tags[0]}.png")
     generate_image(tags, output_img_path)
-    img_url = url_for('static', filename=f'gen_img/{tags[0]}.png')
+    # img_url = url_for('static', filename=f'gen_img/{tags[0]}.png')
 
     # Generate the audio using the song description
     output_file_path = gen_api(song_description, 'new_audio', 6)
-    # output_file_path = "static/audio/new_audio.wav"
 
     audio_url = url_for(
         'static', filename=f'audio/{os.path.basename(output_file_path)}')

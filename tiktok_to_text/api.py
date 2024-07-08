@@ -121,7 +121,8 @@ def t4_api(video_files: List[str]) -> Dict:
 
     # Use ThreadPoolExecutor to parallelize the processing of video files
     with ThreadPoolExecutor() as executor:
-        future_to_video = {executor.submit(process_video, video_file): video_file for video_file in video_files}
+        future_to_video = {executor.submit(
+            process_video, video_file): video_file for video_file in video_files}
         for future in as_completed(future_to_video):
             video_file = future_to_video[future]
             try:
@@ -138,7 +139,8 @@ def t4_api(video_files: List[str]) -> Dict:
     summary_text, tags_text = text_cleaning(summary_tag)
 
     # Clean up temporary audio file
-    name = [video_file.split('.')[0].split('/')[-1] for video_file in video_files]
+    name = [video_file.split('.')[0].split('/')[-1]
+            for video_file in video_files]
     for i in name:
         os.remove(f"temp_audio{i}.wav")
 
