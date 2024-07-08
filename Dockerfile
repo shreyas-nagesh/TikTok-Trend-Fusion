@@ -1,5 +1,5 @@
-# Choose base arm64 image
-FROM debian:12
+# Choose base amd64 image
+FROM --platform=linux/amd64 debian:12
 
 # Update the base image
 RUN apt-get update && apt-get upgrade -y
