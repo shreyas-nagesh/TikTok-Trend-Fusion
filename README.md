@@ -1,8 +1,8 @@
-# TikTok Trend Fusion
+# TrendTok
 
 ## Overview
 
-TikTok Trend Fusion is an innovative project designed to inspire content creators by generating new TikTok video ideas. Utilizing cutting-edge generative AI, this app provides short descriptions of novel video ideas, AI-generated music tracks, and visual templates to enhance the creative process. By analyzing existing trending TikTok videos, TikTok Trend Fusion helps creators develop unique and engaging content.
+TrendTok is an innovative project designed to inspire content creators by generating new TikTok video ideas. Utilizing cutting-edge generative AI, this app provides short descriptions of novel video ideas, AI-generated music tracks, and visual templates to enhance the creative process. By analyzing existing trending TikTok videos, TrendTok helps creators develop unique and engaging content.
 
 ## Features
 
