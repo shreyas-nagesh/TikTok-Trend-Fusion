@@ -26,20 +26,20 @@ TikTok Trend Fusion is an innovative project designed to inspire content creator
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/shreyas-nagesh/TikTok-Trend-Fusion.git
+   git clone https://github.com/srivarshan-s/TikTok-Trend-Fusion.git
    cd TikTok-Trend-Fusion
    ```
 
 2. Install the required dependencies:
    ```bash
-   pip install -r requirements.txt
+   $ pip install -r requirements.txt
    ```
 
 3. Set up environment variables for GCP and API keys (if any).
 
 4. Run the Flask app:
    ```bash
-   flask run
+   $ python app.py
    ```
 
 ## Usage
