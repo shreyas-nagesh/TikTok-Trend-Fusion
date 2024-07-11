@@ -1,8 +1,8 @@
-# TikTok Trend Fusion
+# TrendTok
 
 ## Overview
 
-TikTok Trend Fusion is an innovative project designed to inspire content creators by generating new TikTok video ideas. Utilizing cutting-edge generative AI, this app provides short descriptions of novel video ideas, AI-generated music tracks, and visual templates to enhance the creative process. By analyzing existing trending TikTok videos, TikTok Trend Fusion helps creators develop unique and engaging content.
+TrendTok is an innovative project designed to inspire content creators by generating new TikTok video ideas. Utilizing cutting-edge generative AI, this app provides short descriptions of novel video ideas, AI-generated music tracks, and visual templates to enhance the creative process. By analyzing existing trending TikTok videos, TrendTok helps creators develop unique and engaging content.
 
 ## Features
 
@@ -26,8 +26,8 @@ TikTok Trend Fusion is an innovative project designed to inspire content creator
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/srivarshan-s/TikTok-Trend-Fusion.git
-   cd TikTok-Trend-Fusion
+   $ git clone https://github.com/srivarshan-s/TikTok-Trend-Fusion.git
+   $ cd TikTok-Trend-Fusion
    ```
 
 2. Install the required dependencies:
