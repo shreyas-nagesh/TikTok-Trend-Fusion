@@ -26,20 +26,20 @@ TrendTok is an innovative project designed to inspire content creators by genera
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/shreyas-nagesh/TikTok-Trend-Fusion.git
-   cd TikTok-Trend-Fusion
+   $ git clone https://github.com/srivarshan-s/TikTok-Trend-Fusion.git
+   $ cd TikTok-Trend-Fusion
    ```
 
 2. Install the required dependencies:
    ```bash
-   pip install -r requirements.txt
+   $ pip install -r requirements.txt
    ```
 
 3. Set up environment variables for GCP and API keys (if any).
 
 4. Run the Flask app:
    ```bash
-   python app.py
+   $ python app.py
    ```
 
 ## Usage
@@ -47,6 +47,13 @@ TrendTok is an innovative project designed to inspire content creators by genera
 1. Access the web app through the local server.
 2. Input the necessary parameters to start the data collection and idea generation process.
 3. View and utilize the generated video ideas, music tracks, and visual templates.
+
+## Challenges
+
+- **Data Access**: Overcame restricted API access to TikTok data by utilizing web scraping, third-party APIs, public data repositories, and manual data collection.
+- **Model Availability**: Dealt with limited availability of open-source generative models by finding suitable alternatives for music and image generation.
+- **Compute Power**: Addressed high compute requirements by using lighter models and cloud-based APIs.
+
 
 ## License
 
