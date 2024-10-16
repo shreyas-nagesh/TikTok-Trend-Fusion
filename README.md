@@ -2,6 +2,8 @@
 
 TrendTok is an innovative project designed to inspire content creators by generating new TikTok video ideas. Utilizing cutting-edge generative AI, this app provides short descriptions of novel video ideas, AI-generated music tracks, and visual templates to enhance the creative process. By analyzing existing trending TikTok videos, TrendTok helps creators develop unique and engaging content.
 
+Link to demo video - https://www.youtube.com/watch?v=c_i_0qbHt2A&ab_channel=DoofenshmirtzInc.
+
 ## Features
 
 - **Trending Video Analysis**: Scrapes trending TikTok videos using Selenium and BeautifulSoup, supplemented by third-party APIs for comprehensive data collection.
